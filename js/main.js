@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    
+
     // Header Scroll Effect
     const header = document.getElementById('main-header');
     window.addEventListener('scroll', () => {
@@ -58,11 +58,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Apply animation styles to elements we want to animate
     const animatedElements = document.querySelectorAll('.product-card, .section-title, .section-subtitle, p');
-    
+
     animatedElements.forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(20px)';
         el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
         observer.observe(el);
+    });
+
+    // WhatsApp Order Functionality
+    const whatsappButtons = document.querySelectorAll('.js-whatsapp-order');
+    const phoneNumber = '221785970085';
+
+    whatsappButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const productName = btn.getAttribute('data-product');
+            const message = `Bonjour AMKO Parfumerie, je souhaite commander le produit : ${productName}`;
+            const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+        });
     });
 });
